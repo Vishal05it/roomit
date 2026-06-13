@@ -129,6 +129,9 @@ export default function MyBookings() {
   useEffect(() => {
     setShowBookings(filteredBookings);
   }, [keyWord]);
+  useEffect(() => {
+    allBookings.sort((a, b) => a.bookedAt - b.bookedAt);
+  }, [allBookings]);
   return (
     <>
       {pageLoading ? (
