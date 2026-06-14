@@ -169,11 +169,11 @@ export default function BookingCard({
               }`}
             >
               {status == "active"
-                ? refundableState
+                ? refundable
                   ? "Cancellation Refundable"
                   : "Cancellation Non-Refundable"
                 : status == "cancel"
-                  ? refundableState
+                  ? refundable
                     ? "Cancelled (Refundable)"
                     : "Cancelled (Non-Refundable)"
                   : "Booking Completed"}
