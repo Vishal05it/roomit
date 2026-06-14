@@ -237,6 +237,148 @@ Configure additional variables as required.
 
 ---
 
+## 🏗 Initial Room Setup -SEED COMMAND
+
+Since Room IT is designed to work with predefined meeting rooms, you'll need to populate the database with some room data before using the application.
+
+You can do this using either of the following methods.
+
+---
+
+### Method 1: MongoDB Shell (Recommended)
+
+Open your MongoDB shell and run: (Example data, you can freely use your own data)
+
+```javascript
+db.rooms.insertMany([
+  {
+    "title": "Conference Room A",
+    "description": "A spacious meeting room equipped with a projector and comfortable seating, ideal for team discussions and client meetings.",
+    "floor": 1,
+    "capacity": 8,
+    "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800"
+  },
+  {
+    "title": "Board Room",
+    "description": "Premium board room designed for executive meetings, presentations, and strategic planning sessions.",
+    "floor": 2,
+    "capacity": 12,
+    "image": "https://images.unsplash.com/photo-1517502884422-41eaead166d4?w=800"
+  },
+  {
+    "title": "Discussion Room",
+    "description": "A compact and quiet space suitable for brainstorming sessions, interviews, and one-on-one discussions.",
+    "floor": 3,
+    "capacity": 4,
+    "image": "https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800"
+  },
+  {
+    "title": "Training Room",
+    "description": "A large training room with modern facilities, suitable for workshops, seminars, and team learning activities.",
+    "floor": 4,
+    "capacity": 20,
+    "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800"
+  },
+  {
+    "title": "Meeting Room B",
+    "description": "A modern meeting room featuring a smart display and collaborative workspace for daily team meetings.",
+    "floor": 2,
+    "capacity": 6,
+    "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800"
+  }
+]);
+```
+
+---
+
+### Method 2: Postman API
+
+You can also create rooms directly using the Room IT API.
+
+#### Endpoint
+
+```
+POST http://localhost:<YOUR_PORT>/room/api/createroom
+```
+
+#### Body (Raw JSON) - Example data, you can freely use your own data
+
+```json
+{
+  "email": "<YOUR_EMAIL_FROM_ENV>",
+  "rooms": [
+    {
+      "title": "Conference Room A",
+      "description": "A spacious meeting room equipped with a projector and comfortable seating, ideal for team discussions and client meetings.",
+      "floor": 1,
+      "capacity": 8,
+      "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800"
+    },
+    {
+      "title": "Board Room",
+      "description": "Premium board room designed for executive meetings, presentations, and strategic planning sessions.",
+      "floor": 2,
+      "capacity": 12,
+      "image": "https://images.unsplash.com/photo-1517502884422-41eaead166d4?w=800"
+    },
+    {
+      "title": "Discussion Room",
+      "description": "A compact and quiet space suitable for brainstorming sessions, interviews, and one-on-one discussions.",
+      "floor": 3,
+      "capacity": 4,
+      "image": "https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800"
+    },
+    {
+      "title": "Training Room",
+      "description": "A large training room with modern facilities, suitable for workshops, seminars, and team learning activities.",
+      "floor": 4,
+      "capacity": 20,
+      "image": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800"
+    },
+    {
+      "title": "Meeting Room B",
+      "description": "A modern meeting room featuring a smart display and collaborative workspace for daily team meetings.",
+      "floor": 2,
+      "capacity": 6,
+      "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800"
+    }
+  ]
+}
+```
+
+---
+
+## 🔒 Security Note
+
+The room creation API is protected for security purposes.
+
+**Important:**
+
+The `email` field in the request body **must exactly match the email configured in your ****`.env`**** file**.
+
+Example:
+
+```
+EMAIL=your@email.com
+```
+
+Request:
+
+```json
+{
+  "email": "your@email.com"
+}
+```
+
+If the emails do not match, the API will reject the request and no rooms will be created.
+
+This prevents unauthorized users from populating or modifying the meeting room inventory.
+
+---
+
+Once the rooms have been added using either method, restart the application if necessary and Room IT will be ready for booking and managing meeting rooms.
+
+
 ## 📋 Assignment Requirements Covered
 
 ✅ Meeting room browsing.
