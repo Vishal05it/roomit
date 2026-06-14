@@ -9,6 +9,9 @@ export const timeTeller = (slot: string) => {
     startString +=
       startTime.toString().padStart(2, "0") + slot.slice(2, 5) + " PM";
     //console.log("Start string now :", startString);
+  } else if (startTime == 12) {
+    startString +=
+      startTime.toString().padStart(2, "0") + slot.slice(2, 5) + " PM";
   } else {
     startString +=
       startTime.toString().padStart(2, "0") + slot.slice(2, 5) + " AM";
@@ -19,6 +22,9 @@ export const timeTeller = (slot: string) => {
   let endString: string = "";
   if (endTime > 12) {
     endTime -= 12;
+    endString +=
+      endTime.toString().padStart(2, "0") + slot.slice(10, 13) + " PM";
+  } else if (endTime == 12) {
     endString +=
       endTime.toString().padStart(2, "0") + slot.slice(10, 13) + " PM";
   } else {

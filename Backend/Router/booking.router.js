@@ -173,7 +173,8 @@ bookingRouter.patch("/bookingover/:bookingId", async (req, res) => {
             await limiterModel.findByIdAndDelete(limiter._id);
         }
         else {
-            let reduceLimiter = await limiterModel.updateOne({ bookedBy: booking.bookedBy, date: findDate }, { hours: limiter.hours - 0.5 });
+            let limiterDoc = await limiterModel.findOne({ bookedBy: booking.bookedBy, date: findDate });
+            let reduceLimiter = await limiterModel.updateOne({ bookedBy: booking.bookedBy, date: findDate }, { hours: limiterDoc.hours - 0.5 });
         }
         return res.status(200).json({
             message: "Booking over",
@@ -220,7 +221,8 @@ bookingRouter.patch("/cancelbooking/:bookingId", async (req, res) => {
             await limiterModel.findByIdAndDelete(limiter._id);
         }
         else {
-            let reduceLimiter = await limiterModel.updateOne({ bookedBy: booking.bookedBy, date: findDate }, { hours: limiter.hours - 0.5 });
+            let limiterDoc = await limiterModel.findOne({ bookedBy: booking.bookedBy, date: findDate });
+            let reduceLimiter = await limiterModel.updateOne({ bookedBy: booking.bookedBy, date: findDate }, { hours: limiterDoc.hours - 0.5 });
         }
         if (refundable) {
             transport.sendMail({
