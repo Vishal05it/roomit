@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 5000;
 app.use(cors({
-    origin: [`https://roomit-alpha.vercel.app`, `http://localhost:3000`],
+    origin: [`https://roomit-alpha.vercel.app`],
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
 }));
 connectToDB();
