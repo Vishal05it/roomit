@@ -171,8 +171,8 @@ export default function BookingCard({
               <span className={refundable ? `text-green-700` : `text-red-700`}>
                 {status == "active"
                   ? refundable
-                    ? "Cancellation Refundable"
-                    : "Cancellation Non-Refundable"
+                    ? "Cancellation Available"
+                    : "Cancellation Unavailable"
                   : status == "cancel"
                     ? refundable
                       ? "Cancelled (Refundable)"
