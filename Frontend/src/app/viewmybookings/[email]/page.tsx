@@ -14,8 +14,10 @@ type Booking = {
   slot: string;
   roomId: Room;
   bookedBy: string;
+  bookedByName: string;
   cancelledAt: string;
   bookedAt: number;
+  bookingTitle: string;
   status: "over" | "active" | "cancel";
   refundable: boolean;
 };
@@ -42,7 +44,7 @@ export default function MyBookings() {
         `${baseURL}/booking/api/getallbookings/${userEmail}`,
       );
       let bookingData = await response.json();
-      //console.log(bookingData);
+      console.log(bookingData);
       if (bookingData.success) {
         // successEmitter(bookingData.message);
         setAllBookings(bookingData.bookings);
@@ -170,20 +172,24 @@ export default function MyBookings() {
             {/* Booking Cards */}
             <div className="space-y-4">
               {showBookings.length > 0 ? (
-                showBookings.map((booking) => (
-                  <BookingCard
-                    key={booking._id}
-                    bookingId={booking._id}
-                    bookedAt={booking.bookedAt}
-                    title={booking.roomId.title}
-                    image={booking.roomId.image}
-                    date={booking.date}
-                    slot={booking.slot}
-                    id={booking.roomId._id}
-                    refundable={booking.refundable}
-                    status={booking.status}
-                  />
-                ))
+                showBookings.map((booking) => {
+                  return (
+                    <BookingCard
+                      key={booking._id}
+                      bookingId={booking._id}
+                      bookedAt={booking.bookedAt}
+                      title={booking.roomId.title}
+                      image={booking.roomId.image}
+                      date={booking.date}
+                      slot={booking.slot}
+                      id={booking.roomId._id}
+                      refundable={booking.refundable}
+                      status={booking.status}
+                      bookedByName={booking.bookedByName}
+                      bookingTitle={booking.bookingTitle}
+                    />
+                  );
+                })
               ) : (
                 <div className="bg-white border rounded-lg p-10 text-center">
                   <h2 className="text-xl font-semibold text-black">

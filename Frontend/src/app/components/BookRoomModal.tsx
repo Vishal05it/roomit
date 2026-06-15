@@ -20,6 +20,8 @@ type Form = {
   email: string;
   slot: string;
   date: string;
+  name: string;
+  bookingTitle: string;
 };
 export default function BookRoomModal({ setOpenBookModal, roomId }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -92,6 +94,8 @@ export default function BookRoomModal({ setOpenBookModal, roomId }: Props) {
     email: userEmail,
     slot: allSlots[0]?.value as string,
     date: "",
+    name: "",
+    bookingTitle: "",
   });
   let bookRoom = async () => {
     try {
@@ -105,6 +109,8 @@ export default function BookRoomModal({ setOpenBookModal, roomId }: Props) {
           bookedBy: form.email,
           slot: form.slot,
           date: form.date,
+          name: form.name,
+          bookingTitle: form.bookingTitle,
         }),
       });
       let bookData = await response.json();
@@ -185,6 +191,24 @@ export default function BookRoomModal({ setOpenBookModal, roomId }: Props) {
               onChange={onChangeFunc}
               placeholder="Enter your email"
               className="w-full border border-gray-300 rounded-md px-4 py-2 outline-none focus:border-blue-500 text-black"
+            />
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              required
+              onChange={onChangeFunc}
+              placeholder="Enter your name"
+              className="w-full my-2 border border-gray-300 rounded-md px-4 py-2 outline-none focus:border-blue-500 text-black"
+            />
+            <input
+              type="text"
+              name="bookingTitle"
+              value={form.bookingTitle}
+              required
+              onChange={onChangeFunc}
+              placeholder="Enter why you are booking this room"
+              className="w-full my-2 border border-gray-300 rounded-md px-4 py-2 outline-none focus:border-blue-500 text-black"
             />
           </div>
 

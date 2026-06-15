@@ -7,6 +7,8 @@ type Props = {
   date: string;
   slot: string;
   bookedAt: number;
+  bookedByName: string;
+  bookingTitle: string;
   refundable: boolean;
   status: "over" | "active" | "cancel";
 };
@@ -33,6 +35,8 @@ export default function BookingCard({
   id,
   status,
   refundable,
+  bookedByName,
+  bookingTitle,
 }: Props) {
   const { btnLoading, setBtnLoading, allBookings, setAllBookings } =
     useAllContexts();
@@ -120,7 +124,10 @@ export default function BookingCard({
         <div className="flex-1">
           <div className="flex justify-between items-start">
             <h2 className="text-lg font-semibold text-black">{title}</h2>
-
+            <p className="text-sm text-gray-700 mt-1">
+              📌Booked for :{" "}
+              <span className="text-indigo-600">{bookingTitle}</span>
+            </p>
             <span
               className={
                 status == "active"
@@ -148,7 +155,9 @@ export default function BookingCard({
             {/* <span>{slot}</span> */}
             <span>{timeTeller(slot)}</span>
           </div>
-
+          <p className="text-xs text-gray-500 mt-2">
+            👤 Booked by {bookedByName}
+          </p>
           {/* Booking Timestamp */}
           <p className="text-xs text-gray-500 mt-2">
             Booked {timeCalc(bookedAt)}

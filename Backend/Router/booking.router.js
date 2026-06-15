@@ -63,7 +63,7 @@ bookingRouter.get("/findslots/:date/:roomId", async (req, res) => {
 })
 bookingRouter.post("/bookroom/:roomId", async (req, res) => {
     try {
-        const { bookedBy, slot, date } = req.body;
+        const { bookedBy, slot, date, name, bookingTitle } = req.body;
         const possible = verifyDate(date, slot);
         if (!possible) {
             return res.status(400).json({
@@ -102,7 +102,7 @@ bookingRouter.post("/bookroom/:roomId", async (req, res) => {
             }
             const increaseTime = await limiterModel.updateOne({ date: findDate, bookedBy }, { hours: findDoc.hours + 0.5 });
         }
-        const newBooking = await bookingModel.create({ roomId: req.params.roomId, bookedBy, slot, date, bookedAt: Date.now() });
+        const newBooking = await bookingModel.create({ roomId: req.params.roomId, bookedBy, slot, date, bookedAt: Date.now(), bookedByName: name, bookingTitle });
         const sendBooking = await bookingModel.findById(newBooking._id).populate("roomId");
         transport.sendMail({
             from: process.env.EMAIL,

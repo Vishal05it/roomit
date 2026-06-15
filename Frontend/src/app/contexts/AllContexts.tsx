@@ -37,6 +37,8 @@ type Booking = {
   bookedBy: string;
   cancelledAt: string;
   bookedAt: number;
+  bookedByName: string;
+  bookingTitle: string;
   status: "over" | "active" | "cancel";
   refundable: boolean;
 };
