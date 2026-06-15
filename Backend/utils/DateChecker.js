@@ -18,6 +18,7 @@ export const verifyDate = (date, slot) => {
         if (day == dateObj.getDate()) {
             let startSlot = Number(slot.slice(0, 2));
             let startMinutes = Number(slot.slice(3, 5));
+            console.log(`Start hours = ${startSlot} && start Minutes = ${startMinutes}`)
             // let endSlot = Number(slot.slice(8, 10));
             // let endMinutes = Number(slot.slice(11, 13));
             // console.log(`End minutes : ${endMinutes}`);
@@ -25,6 +26,7 @@ export const verifyDate = (date, slot) => {
             // if (dateObj.getHours() > 12 && startSlot < 12) {
             //     return true;
             // }
+            console.log(`Date hours = ${dateObj.getHours()}`);
             if (dateObj.getHours() > startSlot) {
                 return false;
             }
