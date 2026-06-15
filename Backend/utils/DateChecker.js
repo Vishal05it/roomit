@@ -1,5 +1,5 @@
 export const verifyDate = (date, slot) => {
-    const dateObj = new Date(now.toLocaleString("en-US", {
+    const dateObj = new Date(new Date().toLocaleString("en-US", {
         timeZone: "Asia/Kolkata",
     }));
     let dateString = date.toString();
